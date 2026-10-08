@@ -765,7 +765,24 @@ document.getElementById('btnReset').onclick=()=>{visited.clear();save();selected
 
 /* ================ INIT ================ */
 renderNodes();renderEdges();updateProgress();
-requestAnimationFrame(fitToView);
+/* авто-вписывание: ждём, пока у области появятся размеры, и пересчитываем при любом ресайзе */
+let userMoved=false;
+vp.addEventListener('pointerdown',()=>{userMoved=true});
+vp.addEventListener('wheel',()=>{userMoved=true},{passive:true});
+document.getElementById('btnFit').addEventListener('click',()=>{userMoved=false});
+
+function safeFit(){
+  const r=vp.getBoundingClientRect();
+  if(r.width<50||r.height<50)return;   // ещё не отрисовано: ждём
+  fitToView();
+}
+requestAnimationFrame(safeFit);
+window.addEventListener('load',safeFit);
+if(window.ResizeObserver){
+  new ResizeObserver(()=>{ if(!userMoved) safeFit(); }).observe(vp);
+}else{
+  window.addEventListener('resize',()=>{ if(!userMoved) safeFit(); });
+}
 </script>
 </body>
 </html>
