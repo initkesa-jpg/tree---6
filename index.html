@@ -14,6 +14,8 @@ html,body{height:100%;overflow:hidden;font-family:var(--font);background:var(--b
 body{display:flex;flex-direction:column}
 button{font-family:var(--font);cursor:pointer}
 a{color:var(--acc);text-decoration:none}
+
+/* ===== HEADER ===== */
 .hdr{display:flex;align-items:center;gap:12px;padding:10px 20px;background:var(--bg-s);border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;z-index:20;position:relative}
 .hdr-title{font-size:15px;font-weight:700}
 .hdr-tag{font-size:10px;color:var(--acc);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
@@ -26,17 +28,28 @@ a{color:var(--acc);text-decoration:none}
 .btn-s:hover{background:var(--bg-h);color:var(--text)}
 .btn-fit{background:var(--bg-e);color:var(--t2);border:none;width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;transition:all .15s}
 .btn-fit:hover{background:var(--bg-h);color:var(--text)}
-@media(max-width:700px){.hdr{padding:8px 14px;gap:8px}.hdr-title{font-size:13px}.prog-bar{display:none}.btn-fit{display:none}}
+@media(max-width:700px){
+  .hdr{padding:8px 14px;gap:8px}
+  .hdr-title{font-size:13px}
+  .prog-bar{display:none}
+  .btn-fit{display:none}
+}
+
+/* ===== VIEWPORT ===== */
 .vp{flex:1;overflow:hidden;position:relative;cursor:grab;touch-action:none}
 .vp:active{cursor:grabbing}
 .vp-bg{position:absolute;inset:0;background:radial-gradient(circle at 1px 1px,rgba(255,255,255,.02) 1px,transparent 0) 0 0/28px 28px}
 .canvas{position:absolute;top:0;left:0;transform-origin:0 0;will-change:transform}
+
+/* ===== EDGES (SVG) ===== */
 .edge-svg{position:absolute;top:0;left:0;overflow:visible;pointer-events:none}
 .edge-path{fill:none;stroke:rgba(255,255,255,.12);stroke-width:1.5}
 .edge-path.carry{stroke-dasharray:6 4;stroke:rgba(255,255,255,.08)}
 .edge-path.active{stroke:var(--acc);stroke-width:2}
 .edge-lbl{font-family:var(--font);font-size:9px;fill:var(--t3);pointer-events:none}
 .edge-lbl-bg{fill:var(--bg);opacity:.85}
+
+/* ===== NODES ===== */
 .nd{position:absolute;width:200px;background:var(--bg-s);border:1.5px solid rgba(255,255,255,.08);border-radius:var(--radius);cursor:pointer;user-select:none;transition:border-color .2s,box-shadow .2s}
 .nd:hover{border-color:rgba(255,255,255,.18);box-shadow:0 4px 20px rgba(0,0,0,.3)}
 .nd.sel{border-color:var(--acc);box-shadow:0 0 0 3px rgba(255,85,51,.15)}
@@ -56,10 +69,13 @@ a{color:var(--acc);text-decoration:none}
 .nd-check:hover{border-color:var(--acc);background:rgba(255,85,51,.1)}
 .nd.done .nd-check{background:var(--ok);border-color:var(--ok)}
 .nd.done .nd-check:hover{background:#16a34a;border-color:#16a34a}
+
+/* ===== DETAIL PANEL ===== */
 .panel{position:fixed;top:0;right:0;width:400px;height:100%;background:var(--bg-s);border-left:1px solid rgba(255,255,255,.06);z-index:30;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column}
 #panContent{display:flex;flex-direction:column;flex:1;min-height:0;height:100%}
 .panel.open{transform:translateX(0)}
-@media(max-width:700px){.panel{width:100%;top:auto;bottom:0;height:80vh;border-left:none;border-top:1px solid rgba(255,255,255,.08);border-radius:16px 16px 0 0;transform:translateY(100%)}.panel.open{transform:translateY(0)}}
+@media(max-width:700px){.panel{width:100%;top:auto;bottom:0;height:80vh;border-left:none;border-top:1px solid rgba(255,255,255,.08);border-radius:16px 16px 0 0;transform:translateY(100%)}
+.panel.open{transform:translateY(0)}}
 .pan-head{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0}
 .pan-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .pan-info{flex:1;min-width:0}
@@ -68,15 +84,20 @@ a{color:var(--acc);text-decoration:none}
 .pan-close{background:none;border:none;color:var(--t3);padding:4px;display:flex;transition:color .15s}
 .pan-close:hover{color:var(--text)}
 .pan-scroll{flex:1;min-height:0;overflow-y:scroll;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain;padding:16px 20px 80px;scrollbar-width:thin;scrollbar-color:var(--bg-e) transparent}
+
 .pan-desc{font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:16px}
 .pan-banner{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;font-size:11px;color:var(--t2);line-height:1.5;margin-bottom:16px}
 .pan-banner svg{flex-shrink:0;margin-top:1px;color:var(--t3)}
 .pan-banner.reuse{border-color:rgba(59,130,246,.25);background:rgba(59,130,246,.05)}
+
+/* IO sections */
 .io{margin-bottom:16px}
 .io-h{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);margin-bottom:6px}
 .io-item{padding:5px 8px;margin-bottom:3px;background:var(--bg-e);border-radius:5px;font-size:11px;color:var(--t2);line-height:1.5}
 .io-item.in{border-left:2px solid rgba(59,130,246,.4)}
 .io-item.out{border-left:2px solid rgba(34,197,94,.4)}
+
+/* Prompt / examples */
 .plink{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,85,51,.06);border:1px solid rgba(255,85,51,.12);border-radius:8px;margin-bottom:12px;text-decoration:none !important;transition:background .15s;width:100%;text-align:left}
 .plink:hover{background:rgba(255,85,51,.1)}
 .plink-info{flex:1}
@@ -90,6 +111,8 @@ a{color:var(--acc);text-decoration:none}
 .pprev .kw{color:var(--acc);font-weight:600}
 .pprev .var{color:#4ecdc4}
 .pprev .dim{color:rgba(255,255,255,.3)}
+
+/* Complete button */
 .pan-complete{display:flex;align-items:center;gap:10px;padding:12px 16px;margin-top:16px;background:var(--bg-e);border-radius:8px;cursor:pointer;user-select:none;transition:background .15s}
 .pan-complete:hover{background:var(--bg-h)}
 .pc-box{width:22px;height:22px;border-radius:6px;border:2px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
@@ -98,6 +121,7 @@ a{color:var(--acc);text-decoration:none}
 .pc-box.on svg{opacity:1}
 .pc-text{font-size:12px;color:var(--t2)}
 .pc-text strong{color:var(--text)}
+
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#2a2e38;color:var(--text);padding:10px 22px;border-radius:99px;font-size:13px;font-weight:600;opacity:0;transition:.25s;pointer-events:none;z-index:50}
 .toast.on{opacity:1}
 </style>
@@ -113,16 +137,25 @@ a{color:var(--acc);text-decoration:none}
     <button class="btn-s" id="btnReset">Сбросить</button>
   </div>
 </header>
+
 <div class="vp" id="vp">
   <div class="vp-bg"></div>
   <div class="canvas" id="canvas">
-    <svg class="edge-svg" id="edgeSvg" width="950" height="1120"></svg>
+    <svg class="edge-svg" id="edgeSvg" width="950" height="1120">
+</svg>
     <div id="nodes"></div>
   </div>
 </div>
+
 <div class="panel" id="panel"><div id="panContent"></div></div>
 <div class="toast" id="toast">Промпт скопирован в буфер</div>
+
 <script>
+/* ================ SCORM ================ */
+const SCORM={api:null,init(){this.api=this._find(window);if(this.api)try{this.api.LMSInitialize('')}catch(e){}},done(s){if(!this.api)return;try{this.api.LMSSetValue('cmi.core.lesson_status',s);this.api.LMSCommit('')}catch(e){}},score(v){if(!this.api)return;try{this.api.LMSSetValue('cmi.core.score.raw',String(v));this.api.LMSSetValue('cmi.core.score.min','0');this.api.LMSSetValue('cmi.core.score.max','100');this.api.LMSCommit('')}catch(e){}},finish(){if(this.api)try{this.api.LMSFinish('')}catch(e){}},_find(w){let n=0;while(!w.API&&w.parent!==w&&n++<10)w=w.parent;return w.API||null}};
+SCORM.init();
+window.addEventListener('beforeunload',()=>SCORM.finish());
+
 /* ================ ICONS ================ */
 const IC={
   check:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>',
@@ -145,3 +178,594 @@ const NODE_ICONS={
   canvasIc:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/><line x1="3" y1="12" x2="21" y2="12"/></svg>',
   search:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>',
 };
+
+/* ================ PROMPTS (полные, копируются кнопкой) ================ */
+const PROMPTS={
+brief:`БРИФ ПРОДУКТА
+
+Продукт: [из Product Vision: категория + ключевая выгода, одно предложение]
+Сегмент: [из Product Vision «Для…»]
+Потребность/боль: [из Product Vision «которые испытывают…»]
+Отличие: [из Product Vision «в отличие от… / наше отличие…»]
+Ключевой сценарий: [шаги пользователя от входа до получения ценности — ЕДИНСТВЕННОЕ
+  новое поле; один сценарий, самый важный]
+Метрика успеха: [показатель + целевое значение — из Lean Canvas «Ключевые метрики»]
+Характер бренда: [2–3 слова: строгий / дружелюбный / технологичный / дерзкий…]`,
+
+ds:`Роль: ведущий продуктовый дизайнер. Собери дизайн-систему продукта одним
+самодостаточным файлом design_system.html.
+
+ВХОД — бриф продукта (ниже вставлен целиком):
+[ВСТАВЬТЕ СЮДА ВЕСЬ brief.md ИЗ ШАГА 0]
+
+═══ 1. КОНСТАНТЫ (СSS-переменные в :root) ═══
+- Палитра: тёмный и светлый фон, ОДИН главный акцент + 1-2 вспомогательных,
+  семантические цвета статусов (успех/внимание/ошибка), два уровня текста
+  (основной и приглушённый) + слабый третий для подписей.
+- Радиусы (2-3 ступени), базовый отступ и шкала отступов, тень карточки.
+- Правило: меняем переменную — меняется вся система. Ни одного цвета
+  или радиуса «зашитого» в компонент напрямую.
+
+═══ 2. ТИПОГРАФИКА ═══
+- Пара шрифтов Google Fonts: выразительный ДИСПЛЕЙНЫЙ для цифр и заголовков
+  (характер бренда из брифа!) + спокойный текстовый для абзацев и подписей.
+- Покажи шкалу размеров (h1/h2/body/caption) живыми образцами.
+- «ЦИФРЫ-ГЕРОИ»: крупные живые образцы ключевых метрик продукта
+  (из брифа) дисплейным шрифтом — они задают характер всей системы.
+- Для капс-подписей — letter-spacing; покажи образец.
+
+═══ 3. КОМПОНЕНТЫ (каждый — живым примером с данными продукта) ═══
+- Кнопки: основная, второстепенная, призрачная + состояния hover.
+- Карточка метрики: значение цифрой-героем + подпись + мини-тренд.
+- Поля формы, таблица, статусные бейджи, прогресс (полоса и/или кольцо).
+- Свотчи палитры: цвет + HEX + имя CSS-переменной.
+- Иконки: единый стиль (контурные, один stroke) — и правило:
+  НИКАКИХ эмодзи в интерфейсе и слайдах (разнобой стилей, «тофу» при экспорте).
+
+═══ 4. ФОТО-СТИЛЬ И ГЕНЕРАЦИЯ ИЗОБРАЖЕНИЙ (отдельная секция страницы) ═══
+Это инструкция, по которой будут генерироваться ВСЕ растровые изображения
+продукта (hero посадочной, слайды презентации, key visuals):
+- Настроение, свет и фон кадра; где в кадре живут фирменные цвета
+  (одежда, предметы, подсветка, окружение).
+- Персонажи: один сквозной герой (кто он — из сегмента брифа) +
+  второстепенные для сцен «вместе/челлендж»; персонаж узнаваем между кадрами.
+- Композиция: фокус-объект крупно, лица/руки/запястья НЕ обрезать краем
+  кадра, у фото для слайдов — «спокойная» зона под текст.
+- Дай 2-3 ГОТОВЫХ промпта-образца для генератора изображений с
+  плейсхолдерами [сцена], [эмоция] — чтобы следующие агенты не сочиняли сами.
+- Продукт в кадре: рендер-обтравка (прозрачный PNG) + правило «наши экраны
+  вставляются в корпус устройства композитом, никаких нарисованных экранов».
+
+═══ 5. ГРАФИКИ И ДАННЫЕ ═══
+- Правила честных графиков: время слева направо, у шкал подписи,
+  серии/фазы — семантическими цветами палитры, скругления как у компонентов.
+- Демо-данные правдоподобны для предметной области (никаких lorem ipsum).
+
+═══ 6. ИНСТРУКЦИЯ ДЛЯ АГЕНТА (финальный блок страницы) ═══
+- Использовать ТОЛЬКО переменные из :root.
+- Новый компонент сначала добавляется на эту страницу, потом в продукт.
+- Изображения генерировать строго по секции «Фото-стиль», её промптами.
+
+═══ 7. ТЕХТРЕБОВАНИЯ И САМОПРОВЕРКА ═══
+- Один самодостаточный файл: без JS-библиотек и внешних CSS;
+  шрифты — Google Fonts; адаптивность от 375px.
+- После сборки: открой страницу, сними скриншот, проверь контраст текста
+  на всех фонах (целевой уровень WCAG AA), целостность компонентов между
+  собой; список замечаний — исправь сразу, не откладывая.`,
+
+screens:`Роль: продуктовый дизайнер-прототипист. Собери интерактивный прототип
+продукта одним самодостаточным файлом prototype.html.
+
+ПРИЛОЖЕНЫ ФАЙЛЫ: brief.md (продукт и ключевой сценарий) и design_system.html.
+ЖЁСТКОЕ ПРАВИЛО: используй только компоненты и CSS-переменные дизайн-системы —
+ничего не изобретай заново; новый компонент сначала добавь в design_system.html.
+
+═══ 1. СОСТАВ ЭКРАНОВ ═══
+- Стартовый экран с главной ценностью продукта (из брифа).
+- Экраны ключевого сценария от входа до получения ценности — всего 4-6
+  состояний. Если продукт носимый/мобильный — соблюдай реальную форму
+  экрана (круг часов, вытянутый телефон), это пригодится для мокапов.
+
+═══ 2. ИНТЕРАКТИВ ═══
+- Прототип кликабельный: сценарий проходится целиком (переходы по клику).
+- Демо-данные зашиты в файл: 5-10 правдоподобных записей из предметной
+  области, согласованных между экранами (одни и те же имена/цифры).
+  Никаких lorem ipsum и «Иванов Иван».
+
+═══ 3. ГРАФИКИ И ЦИФРЫ ═══
+- Графики «как настоящие»: время идёт слева направо, значения согласованы,
+  у шкал подписи, серии — семантическими цветами палитры.
+- Ключевые цифры — дисплейным шрифтом («цифры-герои» из дизайн-системы).
+
+═══ 4. САМОПРОВЕРКА (обязательный финальный шаг) ═══
+- Пройди сценарий как пользователь от начала до конца.
+- Сними скриншот КАЖДОГО состояния, сложи в screens/ с говорящими именами
+  (screens/01_home.png, screens/02_action.png…).
+- Проверь консоль браузера — ошибок быть не должно.
+- Составь список замечаний (обрезки, наложения, несогласованные данные)
+  и исправь их сразу.`,
+
+landing:`Роль: веб-дизайнер продукта. Собери посадочную страницу одним
+самодостаточным файлом landing.html.
+
+ПРИЛОЖЕНЫ ФАЙЛЫ: brief.md, design_system.html, prototype.html и скриншоты
+экранов (screens/). Стиль — ТОЛЬКО переменные и компоненты дизайн-системы.
+
+═══ СТРУКТУРА ЭТАЖЕЙ ═══
+hero → цифры-факты → фичи → экраны продукта → социальное доказательство →
+тарифы → финальный CTA.
+
+═══ 1. HERO ═══
+- Продукт КРУПНО: мокап устройства, внутри корпуса — НАШ настоящий экран
+  из прототипа (композит: скриншот под обтравкой корпуса), не заглушка.
+- Заголовок-ценность из брифа + главное действие (одна кнопка).
+- Фон/персонаж: фотореалистичное изображение по секции «Фото-стиль»
+  дизайн-системы (её готовыми промптами); лица, руки и ключевые объекты
+  НЕ обрезать краем кадра; текст — на спокойной части изображения.
+
+═══ 2. ФИЧИ — ЧЕРЕЗ ВЫГОДЫ ═══
+- Каждая фича сформулирована как выгода пользователя (что изменится),
+  а не характеристика.
+- У каждой — живой фрагмент интерфейса из прототипа (скриншот или
+  переиспользованный компонент), НЕ абстрактная иконка.
+
+═══ 3. ЭКРАНЫ ПРОДУКТА ═══
+- Скриншоты из screens/ показываются в корпусах устройств (композит).
+- Подписи объясняют шаг сценария, а не «скриншот экрана».
+
+═══ 4. ТАРИФЫ И CTA ═══
+- Рядом с ценой — живой фрагмент интерфейса (что получает подписчик),
+  карточки тарифов не пустые.
+- Финальный CTA повторяет главное действие hero.
+
+═══ 5. МОБИЛЬНАЯ ВЕРСИЯ ═══
+- Меню сворачивается в бургер.
+- Горизонтального скролла НЕТ ни на одном этаже; проверь на ширине 375px.
+- Крупные композиты масштабируются, а не вылезают за край.
+
+═══ 6. САМОПРОВЕРКА ═══
+- Скриншоты десктопа И мобайла по всем этажам, консоль без ошибок.
+- Пройди страницу взглядом «инвестора на 30 секунд»: понятно ли ЧТО это,
+  ДЛЯ КОГО и ЧТО СДЕЛАТЬ? Список замечаний — исправь сразу.`,
+
+deck:`Роль: продуктовый питч-мейкер. Собери презентацию проекта (HTML-слайды
+или MARP с темой из дизайн-системы).
+
+ПРИЛОЖЕНЫ ФАЙЛЫ: brief.md · design_system.html · скриншоты экранов
+(screens/) · landing.html · финмодель (02_finmodel.ipynb) · заполненный
+холст AI Leverage.
+
+ГЛАВНОЕ ПРАВИЛО — НИЧЕГО НЕ ВЫДУМЫВАТЬ:
+- каждое ЧИСЛО на слайдах берётся из приложенных артефактов
+  (финмодель, бенчмарки, метрика с целевым значением);
+- видение, гипотезы, риски и фазы — из холста AI Leverage;
+- экраны — настоящие скриншоты прототипа, не перерисованные.
+
+═══ ОБЯЗАТЕЛЬНЫЕ СЛАЙДЫ (порядок питча) ═══
+1. Титул: название решения, этап «Концепция», автор.
+2. Видение: «Для [сегмент], кто испытывает [боль], [решение] даёт [выгоду];
+   в отличие от [конкурента] — [отличие]» — одним предложением из брифа.
+3. Гипотезы и риски: метрики с целевыми значениями (таблица) + риски.
+4. Ключевые фазы: план по кварталам; каждая фаза заканчивается работающим
+   результатом; первая фаза — пилот с коротким time-to-evidence.
+5. Ресурсы: команда ролями, dev days диапазоном, срок.
+6. Инвестиционные показатели: бюджет, эффект, окупаемость из финмодели.
+ДОПОЛНИТЕЛЬНЫЕ (если укладываемся в 5 минут): экраны ключевого сценария
+(скрины в корпусах устройств), аудитория (фото по фото-стилю ДС), ссылка/QR
+на посадочную.
+
+═══ ПРАВИЛА КОМПОЗИЦИИ ═══
+- Обложка: продукт в 2-3 раза КРУПНЕЕ, чем кажется достаточным; может
+  выходить за край слайда.
+- 1-2 полноширинных фотослайда для ритма; текст — на спокойной части кадра;
+  лица и ключевые объекты не обрезать.
+- Заголовки блоков выровнены по одной линии; сетка едина между слайдами.
+- Вместо эмодзи — иконки в стиле дизайн-системы.
+- Изображения генерируй промптами из секции «Фото-стиль» дизайн-системы.
+
+═══ РЕПЛИКИ ═══
+К каждому слайду напиши реплику на 30-40 секунд разговорным языком:
+что видим, что это значит, почему верим (число — источник). Суммарно
+реплики должны укладываться в 4:30 — это сценарий эксплейнера.
+
+═══ САМОПРОВЕРКА ═══
+Прогони презентацию: каждое число можешь проследить до артефакта?
+Слайды читаются с трёх метров (кегль)? Скриншоты не растянуты?`,
+
+explainer:`Роль: моушн-редактор. Преврати приложенную HTML-презентацию в эксплейнер —
+она должна рассказать проект сама, без присутствия автора.
+
+ПРИЛОЖЕН ФАЙЛ: presentation.html с репликами к каждому слайду.
+
+═══ 1. ХРОНОМЕТРАЖ ═══
+- Посчитай длительность реплик при темпе ~150 слов/мин.
+- Суммарно должно быть ≤ 4:30. Длинные реплики ужми, СОХРАНИВ все числа
+  и выводы (числа — главная ценность, резать прилагательные).
+
+═══ 2. ОЗВУЧКА ═══
+- Озвучь каждую реплику бесплатным TTS (например edge-tts, ровный деловой
+  голос, один на всю презентацию, например ru-RU-DmitryNeural).
+- По одному mp3 на слайд, сложи в audio/slide0.mp3, slide1.mp3…
+
+═══ 3. КНОПКА «ЭКСПЛЕЙНЕР» ═══
+- Play: играет реплику ТЕКУЩЕГО слайда, по её окончании сам листает дальше
+  и продолжает до конца.
+- Повторный клик или Esc — полная остановка (звук замолкает сразу).
+- Кнопка заметна, но не перекрывает контент слайда.
+
+═══ 4. НАДЁЖНОСТЬ ═══
+- Фолбэк: если mp3 не загрузился — Web Speech API с системным голосом
+  (та же логика автолистания).
+- На мобильном: кнопка и пагинация не прилипают к краям экрана
+  и не перекрывают контент; элементы достаточно крупные для пальца.
+
+═══ 5. САМОПРОВЕРКА ═══
+- Полный прогон с первого слайда: укладывается в 5 минут, автолистание
+  не обгоняет голос, остановка срабатывает в любой момент.
+- Проверь на мобильной ширине (375px).`
+};
+
+/* ================ NODE DATA ================ */
+const PROMPT_DOCS={brief:'00_brief.md',ds:'01_design_system.md',screens:'02_screens.md',
+  landing:'03_landing.md',deck:'04_presentation.md',explainer:'05_explainer.md'};
+const W=200, H=88;
+const REUSE_BANNER='Этот артефакт у вас уже есть из прошлых практик — не создавайте заново. Ниже перечислены конкретные файлы: найдите свои версии и держите под рукой, они подставляются в промпты следующих шагов.';
+const GL='https://git.lab.karpov.courses/dddm/setup/-/blob/master';
+const NODES=[
+  /* — переиспользуемые артефакты прошлых модулей — */
+  {id:'research',x:20,y:30,icon:'search',color:'#64748b',reuse:true,tag:'М1 · уроки 1.3–1.6',title:'Исследования и сегмент',
+   desc:'Артефакты 2, 4 и 6 практики М1: конкуренты, JTBD, аналитическая записка',
+   badges:[{t:'reuse',l:'практика М1'}],
+   inputs:['06_analytical_note.md — аналитическая записка, артефакт 6 практики М1 (урок 1.6)','04_interview_analysis.md — JTBD, CJM, инсайты интервью (урок 1.4)','02_feature_comparison_matrix.md — конкуренты и FCM (урок 1.3)'],
+   outputs:['Сегмент и его боль → в бриф','Отличие от конкурентов → в бриф','Инсайты → аргументы слайда «Видение»'],
+   banner:REUSE_BANNER,
+   examples:[{url:GL+'/m1/prompt_analytical_report.md',label:'Записки нет? Промпт: аналитическая записка',hint:'m1/prompt_analytical_report.md'}]},
+  {id:'metrics',x:250,y:30,icon:'metric',color:'#64748b',reuse:true,tag:'М1 · уроки 1.2–1.3',title:'Метрика и бенчмарки',
+   desc:'«Ключевые метрики» из Lean Canvas + бенчмарки из FCM + дерево метрик',
+   badges:[{t:'reuse',l:'практика М1'}],
+   inputs:['01_product_vision_lean_canvas.md — блок «Ключевые метрики» (урок 1.2)','02_feature_comparison_matrix.md — бенчмарки конкурентов (урок 1.3)','Дерево метрик — тренажёр предматериалов (свой результат)'],
+   outputs:['Метрика успеха + целевое значение → в бриф','Бенчмарки → в слайд «Гипотезы и риски»'],
+   banner:REUSE_BANNER,
+   examples:[{url:'examples/metric_tree_trainer.html',label:'Тренажёр «Дерево метрик»',hint:'освежить свою метрику'}]},
+  {id:'finmodel',x:480,y:30,icon:'money',color:'#64748b',reuse:true,tag:'М2 · урок 2.6',title:'Финансовая модель',
+   desc:'Артефакт 2 практики М2: ноутбук финмодели — затраты, LTV, окупаемость',
+   badges:[{t:'reuse',l:'практика М2'}],
+   inputs:['02_finmodel.ipynb — ваша финмодель, артефакт 2 практики М2 (урок 2.6)','Оценки dev days — быстрые методы из урока 6.3'],
+   outputs:['Затраты и срок → слайд «Ресурсы»','Экономика (LTV, окупаемость) → слайд «Инвестпоказатели»'],
+   banner:REUSE_BANNER,
+   examples:[{url:GL+'/m2/L2.6_finmodel/L2.6_financial_model.ipynb',label:'Урок 2.6: ноутбук финмодели',hint:'m2/L2.6_finmodel/L2.6_financial_model.ipynb'}]},
+  {id:'canvas9',x:710,y:30,icon:'canvasIc',color:'#64748b',reuse:true,tag:'М6 · уроки 6.1–6.2',title:'Холст AI Leverage',
+   desc:'Ваш заполненный холст из практики 6.1–6.2: процесс, роль ИИ, видение, гипотезы',
+   badges:[{t:'reuse',l:'практика М6'}],
+   inputs:['Заполненный холст AI Leverage — итог практики уроков 6.1–6.2 (9 ячеек: по слайдам урока 6.2 — на каждую ячейку свой слайд-инструкция)'],
+   outputs:['Видение и роль ИИ → слайд «Видение»','Гипотезы и риски → одноимённый слайд','Фазы внедрения → слайд «Ключевые фазы»'],
+   banner:REUSE_BANNER},
+
+  /* — новые артефакты: собираются по цепочке — */
+  {id:'brief',x:135,y:210,icon:'file',color:'#ff5533',tag:'Шаг 0 · сборка из М1, ~10 минут',title:'Бриф продукта',
+   desc:'Не пишется с нуля — собирается из вашего Product Vision + Lean Canvas (практика М1)',
+   badges:[{t:'prompt',l:'Шаблон'},{t:'',l:'brief.md'}],
+   inputs:['01_product_vision_lean_canvas.md — артефакт 1 практики М1 (урок 1.2): сегмент, боль, отличие, метрики, монетизация','Метрика успеха с целевым значением — «Ключевые метрики» Lean Canvas','Нет своего продукта — учебный бриф m1/product_brief.md («Пульс»)'],
+   outputs:['brief.md — 1 страница','Подставляется в КАЖДЫЙ следующий промпт'],
+   banner:'Всё дерево растёт из брифа. Новое здесь только одно поле — ключевой сценарий; остальное переносится из Product Vision и Lean Canvas урока 1.2.',
+   promptKey:'brief',
+   promptPreview:'<span class="kw">БРИФ = ваш Product Vision, переложенный в 1 страницу</span>\nПродукт: <span class="var">[из PVT: категория + выгода]</span>\nСегмент: <span class="var">[из PVT «Для…»]</span>\nПотребность/боль: <span class="var">[из PVT «которые…»]</span>\nОтличие: <span class="var">[из PVT «в отличие от…»]</span>\nКлючевой сценарий: <span class="var">[вход → ценность]</span> <span class="dim">← новое</span>\nМетрика успеха: <span class="var">[из Lean Canvas «Ключевые метрики»]</span>\nХарактер бренда: <span class="var">[2–3 слова]</span>',
+   examples:[{url:GL+'/m1/template_product_vision_lean_canvas.md',label:'Шаблон: Product Vision + Lean Canvas (урок 1.2)',hint:'m1/template_product_vision_lean_canvas.md'},{url:GL+'/m1/product_brief.md',label:'Готовый пример: бриф «Пульс»',hint:'m1/product_brief.md'}]},
+  {id:'ds',x:135,y:390,icon:'palette',color:'#a78bfa',tag:'Шаг 1 · урок 6.4',title:'Дизайн-система',
+   desc:'Константы и компоненты одним HTML — стиль решается один раз',
+   badges:[{t:'prompt',l:'Промпт'},{t:'',l:'design_system.html'}],
+   inputs:['brief.md (шаг 0) — вставляется в промпт целиком'],
+   outputs:['design_system.html: :root-переменные, компоненты','Раздел «Фото-стиль» для генерации изображений','Инструкция для агента: «только переменные из :root»'],
+   promptKey:'ds',
+   promptPreview:'<span class="kw">Роль: продуктовый дизайнер.</span>\nСобери дизайн-систему одним файлом.\n\nВХОД: <span class="var">[бриф из шага 0 целиком]</span>\n\n1. Константы — CSS-переменные в :root\n2. Типографика-пара + <span class="var">«цифры-герои»</span>\n3. Компоненты с живыми примерами\n4. Раздел <span class="kw">«Фото-стиль»</span>\n5. Инструкция для агента\n6. Файл самодостаточный\n<span class="dim">+ самопроверка контраста</span>',
+   examples:[{url:'examples/design_system.html',label:'Живой пример: ДС «Пульс»',hint:'design_system.html'}]},
+  {id:'screens',x:20,y:570,icon:'screens',color:'#3b82f6',tag:'Шаг 2 · урок 6.4',title:'Экраны продукта',
+   desc:'Кликабельный прототип ключевого сценария + скриншоты состояний',
+   badges:[{t:'prompt',l:'Промпт'},{t:'',l:'prototype.html'}],
+   inputs:['brief.md (шаг 0) — приложить файлом','design_system.html (шаг 1) — приложить файлом'],
+   outputs:['prototype.html — 4–6 состояний на демо-данных','Скриншоты каждого состояния → screens/','Отчёт самопроверки: сценарий, консоль, замечания'],
+   promptKey:'screens',
+   promptPreview:'<span class="kw">Роль: прототипист.</span> Один файл prototype.html.\n\nПРИЛОЖИ: <span class="var">brief.md</span> + <span class="var">design_system.html</span>\nТолько компоненты дизайн-системы!\n\n1. Стартовый экран + ключевой сценарий\n2. Демо-данные правдоподобные, 5–10 записей\n3. Графики «как настоящие»\n<span class="kw">САМОПРОВЕРКА:</span> <span class="dim">пройти сценарий, скрины,\nконсоль, исправить замечания</span>',
+   examples:[{url:'examples/watch_screens.html',label:'Пример: экраны часов «Пульс»',hint:'5 состояний'},{url:'examples/app_screens.html',label:'Пример: приложение «Пульс»',hint:'5 макетов'}]},
+  {id:'landing',x:460,y:570,icon:'rocket',color:'#4ecdc4',tag:'Шаг 3 · урок 6.4',title:'Посадочная страница',
+   desc:'Витрина продукта: hero, фичи, экраны, тарифы — публикуется на Pages',
+   badges:[{t:'prompt',l:'Промпт'},{t:'',l:'landing.html'}],
+   inputs:['brief.md (шаг 0)','design_system.html (шаг 1) — стиль','prototype.html + скриншоты (шаг 2) — экраны в корпусах'],
+   outputs:['landing.html — hero, фичи-выгоды, тарифы, CTA','Публикация на GitHub Pages → ссылка для людей','Скрины «этажей» → в презентацию'],
+   promptKey:'landing',
+   promptPreview:'<span class="kw">Роль: веб-дизайнер.</span> Один файл landing.html.\n\nПРИЛОЖИ: <span class="var">brief.md · design_system.html ·\nprototype.html + скриншоты</span>\n\nhero → цифры → фичи → экраны → тарифы → CTA\n- продукт КРУПНО, экраны настоящие, в корпусах\n- лица/объекты не обрезать\n- мобайл: бургер, без горизонтального скролла\n<span class="kw">САМОПРОВЕРКА:</span> <span class="dim">скрины этажей + консоль</span>',
+   examples:[{url:'examples/landing.html',label:'Пример: лендинг «Пульс»',hint:'landing.html'}]},
+  {id:'deck',x:250,y:760,icon:'deck',color:'#fb923c',tag:'Шаг 4 · урок 6.6',title:'Финальная презентация',
+   desc:'6 слайдов питча на дизайн-системе; каждое число — из артефактов',
+   badges:[{t:'prompt',l:'Промпт'},{t:'',l:'6 слайдов питча'}],
+   inputs:['brief.md · design_system.html (шаг 1)','Скриншоты экранов (шаг 2) + landing.html (шаг 3)','02_finmodel.ipynb (практика М2) — цифры «Ресурсы»/«Инвест»','Холст AI Leverage (практика 6.1–6.2) — видение, гипотезы, фазы'],
+   outputs:['Презентация: титул · видение · гипотезы и риски · фазы · ресурсы · инвестпоказатели','Реплика 30–40 с к каждому слайду — сценарий эксплейнера'],
+   banner:'Здесь ничего не создаётся с нуля — презентация СВОДИТ готовые артефакты. Задача — собрать, а не выдумать.',
+   promptKey:'deck',
+   promptPreview:'<span class="kw">Роль: питч-мейкер.</span> HTML-слайды или MARP.\n\nПРИЛОЖИ: <span class="var">бриф · ДС · скрины экранов ·\nлендинг · финмодель · холст</span>\n\n<span class="kw">НИЧЕГО НЕ ВЫДУМЫВАЙ</span> — каждое число\nиз приложенных артефактов.\n\nтитул → видение → гипотезы и риски →\nфазы → ресурсы → инвестпоказатели\n<span class="dim">+ реплика 30–40 с на слайд (для озвучки)</span>',
+   examples:[{url:'examples/presentation.html',label:'Пример: презентация «Пульс»',hint:'10 слайдов + Play'}]},
+  {id:'explainer',x:250,y:940,icon:'play',color:'#ff5533',tag:'Шаг 5 · урок 6.6 · супер-артефакт',title:'Эксплейнер',
+   desc:'Презентация говорит сама: голос + автолистание, до 5 минут',
+   badges:[{t:'prompt',l:'Промпт'},{t:'',l:'Play ≤ 5 мин'}],
+   inputs:['presentation.html с репликами (шаг 4)'],
+   outputs:['Кнопка Play: голос объясняет, слайды листаются сами','mp3 на каждый слайд (бесплатный TTS) + фолбэк','Решение принимают без вашего присутствия'],
+   promptKey:'explainer',
+   promptPreview:'<span class="kw">Роль: моушн-редактор.</span>\n\nПРИЛОЖИ: <span class="var">presentation.html с репликами</span>\n\n1. Хронометраж ≤ 4:30 (150 слов/мин)\n2. edge-tts → mp3 на слайд → audio/\n3. Play: реплика → автолистание; Esc — стоп\n4. Фолбэк: Web Speech API\n5. Мобайл: кнопки не на краях\n<span class="kw">ПРОВЕРКА:</span> <span class="dim">полный прогон ≤ 5 минут</span>',
+   examples:[{url:'examples/presentation.html',label:'Пример: кнопка Play в «Пульсе»',hint:'эксплейнер в действии'}]},
+];
+
+/* ================ EDGES ================ */
+const EDGES=[
+  {from:'research',to:'brief',label:'сегмент · боль'},
+  {from:'metrics',to:'brief',label:'метрика + цель'},
+  {from:'brief',to:'ds',label:'бриф целиком'},
+  {from:'ds',to:'screens',label:'компоненты · :root'},
+  {from:'brief',to:'screens',label:'ключевой сценарий',carry:true},
+  {from:'ds',to:'landing',label:'стиль'},
+  {from:'screens',to:'landing',label:'скриншоты экранов',cross:true},
+  {from:'screens',to:'deck',label:'скрины интерфейса'},
+  {from:'landing',to:'deck',label:'hero · витрина'},
+  {from:'ds',to:'deck',label:'стиль слайдов',carry:true},
+  {from:'finmodel',to:'deck',label:'финмодель: цифры',carry:true},
+  {from:'canvas9',to:'deck',label:'видение · гипотезы',carry:true},
+  {from:'deck',to:'explainer',label:'реплики 30–40 с'},
+];
+
+/* ================ STATE ================ */
+const SK='dddm_m6_artifact_tree_v3';
+let visited=new Set(), selected=null;
+function load(){try{const d=JSON.parse(localStorage.getItem(SK));if(d)visited=new Set(d.v||[])}catch(e){}}
+function save(){try{localStorage.setItem(SK,JSON.stringify({v:[...visited]}))}catch(e){}}
+load();
+
+/* ================ CANVAS ENGINE ================ */
+let tx=0,ty=0,sc=1;
+let dragging=false,dragX=0,dragY=0;
+const vp=document.getElementById('vp');
+const cvs=document.getElementById('canvas');
+
+function applyTransform(){cvs.style.transform=`translate(${tx}px,${ty}px) scale(${sc})`}
+
+vp.addEventListener('pointerdown',e=>{
+  if(e.target.closest('.nd')||e.target.closest('.panel'))return;
+  dragging=true;dragX=e.clientX-tx;dragY=e.clientY-ty;
+});
+vp.addEventListener('pointermove',e=>{
+  if(!dragging)return;
+  tx=e.clientX-dragX;ty=e.clientY-dragY;applyTransform();
+});
+vp.addEventListener('pointerup',()=>{dragging=false});
+
+vp.addEventListener('wheel',e=>{
+  e.preventDefault();
+  const rect=vp.getBoundingClientRect();
+  const mx=e.clientX-rect.left, my=e.clientY-rect.top;
+  const d=e.ctrlKey?-e.deltaY*0.01:-e.deltaY*0.002;
+  const ns=Math.min(3,Math.max(0.2,sc*(1+d)));
+  const r=ns/sc;
+  tx=mx-(mx-tx)*r; ty=my-(my-ty)*r; sc=ns;
+  applyTransform();
+},{passive:false});
+
+let touches=[];
+vp.addEventListener('touchstart',e=>{if(e.target.closest('.panel'))return;touches=[...e.touches]},{passive:true});
+vp.addEventListener('touchmove',e=>{
+  if(e.target.closest('.panel'))return;
+  if(e.touches.length===2){
+    e.preventDefault();
+    const t=e.touches;
+    const d=Math.hypot(t[0].clientX-t[1].clientX,t[0].clientY-t[1].clientY);
+    const mx=(t[0].clientX+t[1].clientX)/2, my=(t[0].clientY+t[1].clientY)/2;
+    if(touches.length===2){
+      const pd=Math.hypot(touches[0].clientX-touches[1].clientX,touches[0].clientY-touches[1].clientY);
+      const r=d/pd;
+      const ns=Math.min(3,Math.max(0.2,sc*r));
+      const ratio=ns/sc;
+      const rect=vp.getBoundingClientRect();
+      const cx=mx-rect.left, cy=my-rect.top;
+      tx=cx-(cx-tx)*ratio; ty=cy-(cy-ty)*ratio; sc=ns;
+    }
+    applyTransform();
+  }
+  touches=[...e.touches];
+},{passive:false});
+
+function fitToView(){
+  const rect=vp.getBoundingClientRect();
+  const pad=40;
+  let minX=Infinity,minY=Infinity,maxX=-Infinity,maxY=-Infinity;
+  NODES.forEach(n=>{minX=Math.min(minX,n.x);minY=Math.min(minY,n.y);maxX=Math.max(maxX,n.x+W);maxY=Math.max(maxY,n.y+H)});
+  const cw=maxX-minX+pad*2, ch=maxY-minY+pad*2;
+  sc=Math.min(rect.width/cw, rect.height/ch, 1.2);
+  tx=(rect.width-cw*sc)/2 - minX*sc + pad*sc;
+  ty=(rect.height-ch*sc)/2 - minY*sc + pad*sc;
+  applyTransform();
+}
+document.getElementById('btnFit').onclick=fitToView;
+
+/* ================ RENDER EDGES ================ */
+function portPos(nd,side){
+  if(side==='bottom')return{x:nd.x+W/2,y:nd.y+H};
+  if(side==='top')return{x:nd.x+W/2,y:nd.y};
+  if(side==='right')return{x:nd.x+W,y:nd.y+H/2};
+  return{x:nd.x,y:nd.y+H/2};
+}
+function nodeById(id){return NODES.find(n=>n.id===id)}
+
+function renderEdges(){
+  const svg=document.getElementById('edgeSvg');
+  let html='';
+  EDGES.forEach(e=>{
+    const fn=nodeById(e.from), tn=nodeById(e.to);
+    let p1,p2,c1,c2;
+    const gap=2;
+    if(e.cross){
+      p1=portPos(fn,'right'); p2=portPos(tn,'left');
+      p2={x:p2.x+gap,y:p2.y};
+      const dx=p2.x-p1.x;
+      c1={x:p1.x+dx*0.4,y:p1.y}; c2={x:p2.x-dx*0.4,y:p2.y};
+    } else if(e.carry){
+      p1=portPos(fn,'bottom'); p2=portPos(tn,'top');
+      p2={x:p2.x,y:p2.y-gap};
+      const offX=fn.x<tn.x?-50:50;
+      c1={x:p1.x+offX,y:p1.y+(p2.y-p1.y)*0.3};
+      c2={x:p2.x+offX,y:p2.y-(p2.y-p1.y)*0.3};
+    } else {
+      p1=portPos(fn,'bottom'); p2=portPos(tn,'top');
+      p2={x:p2.x,y:p2.y-gap};
+      const dy=p2.y-p1.y;
+      c1={x:p1.x,y:p1.y+dy*0.4}; c2={x:p2.x,y:p2.y-dy*0.4};
+    }
+    const isActive=selected===e.from||selected===e.to;
+    const cls=e.carry?'edge-path carry':'edge-path';
+    html+=`<path class="${cls}${isActive?' active':''}" d="M${p1.x},${p1.y} C${c1.x},${c1.y} ${c2.x},${c2.y} ${p2.x},${p2.y}"/>`;
+    const t=0.95,t1=1-t;
+    const tx2=3*t1*t1*(c1.x-p1.x)+6*t1*t*(c2.x-c1.x)+3*t*t*(p2.x-c2.x);
+    const ty2=3*t1*t1*(c1.y-p1.y)+6*t1*t*(c2.y-c1.y)+3*t*t*(p2.y-c2.y);
+    const len=Math.sqrt(tx2*tx2+ty2*ty2)||1;
+    const ux=tx2/len,uy=ty2/len;
+    const px=-uy,py=ux;
+    const sz=7;
+    const ax=p2.x-ux*sz+px*sz*0.5, ay=p2.y-uy*sz+py*sz*0.5;
+    const bx=p2.x-ux*sz-px*sz*0.5, by=p2.y-uy*sz-py*sz*0.5;
+    const aFill=isActive?'#ff5533':e.carry?'rgba(255,255,255,.2)':'rgba(255,255,255,.35)';
+    html+=`<polygon points="${p2.x},${p2.y} ${ax},${ay} ${bx},${by}" fill="${aFill}"/>`;
+    const mx=.125*p1.x+.375*c1.x+.375*c2.x+.125*p2.x;
+    const my=.125*p1.y+.375*c1.y+.375*c2.y+.125*p2.y;
+    const tw=e.label.length*5+8, th=14;
+    html+=`<rect class="edge-lbl-bg" x="${mx-tw/2}" y="${my-th/2}" width="${tw}" height="${th}" rx="3"/>`;
+    html+=`<text class="edge-lbl" x="${mx}" y="${my+3}" text-anchor="middle">${esc(e.label)}</text>`;
+  });
+  svg.innerHTML=html;
+}
+
+/* ================ RENDER NODES ================ */
+function renderNodes(){
+  const container=document.getElementById('nodes');
+  container.innerHTML='';
+  NODES.forEach(nd=>{
+    const done=visited.has(nd.id);
+    const sel=selected===nd.id;
+    const el=document.createElement('div');
+    el.className='nd'+(done?' done':'')+(sel?' sel':'')+(nd.reuse?' reuse':'');
+    el.style.cssText=`left:${nd.x}px;top:${nd.y}px;width:${W}px`;
+    el.dataset.id=nd.id;
+    el.innerHTML=`
+      <div class="nd-bar" style="background:${nd.color}"></div>
+      <div class="nd-body">
+        <div class="nd-tag" style="color:${nd.color}">${nd.tag}</div>
+        <div class="nd-title">${nd.title}</div>
+        <div class="nd-desc">${nd.desc}</div>
+        <div class="nd-foot">
+          ${nd.badges.map(b=>`<span class="nd-badge${b.t?' '+b.t:''}">${b.l}</span>`).join('')}
+          <div class="nd-check">${done?IC.check:''}</div>
+        </div>
+      </div>`;
+    container.appendChild(el);
+  });
+}
+
+/* ================ DETAIL PANEL ================ */
+function openPanel(id){
+  selected=id;
+  const nd=nodeById(id);
+  const panel=document.getElementById('panel');
+  const ct=document.getElementById('panContent');
+  const done=visited.has(id);
+  let h=`<div class="pan-head">
+    <div class="pan-icon" style="background:${nd.color}15;color:${nd.color}">${NODE_ICONS[nd.icon]||''}</div>
+    <div class="pan-info"><div class="pan-tag" style="color:${nd.color}">${nd.tag}</div><div class="pan-title">${nd.title}</div></div>
+    <button class="pan-close" data-action="close">${IC.close}</button>
+  </div><div class="pan-scroll">`;
+  h+=`<div class="pan-desc">${nd.desc}</div>`;
+  if(nd.banner)h+=`<div class="pan-banner${nd.reuse?' reuse':''}">${IC.info}<span>${nd.banner}</span></div>`;
+  if(nd.inputs?.length)h+=`<div class="io"><div class="io-h">${nd.reuse?'Где взять':'Входные артефакты'}</div>${nd.inputs.map(i=>`<div class="io-item in">${esc(i)}</div>`).join('')}</div>`;
+  if(nd.outputs?.length)h+=`<div class="io"><div class="io-h">${nd.reuse?'Что берём дальше':'Выходные артефакты'}</div>${nd.outputs.map(o=>`<div class="io-item out">${esc(o)}</div>`).join('')}</div>`;
+  if(nd.promptKey){
+    h+=`<button class="plink" data-action="copy-prompt" data-key="${nd.promptKey}"><span style="color:var(--acc)">${IC.copy}</span><div class="plink-info"><div class="plink-label">Скопировать промпт целиком</div><div class="plink-hint">вставьте агенту вместе с файлами из «входных артефактов»</div></div><span style="color:var(--acc)">${IC.arrow}</span></button>`;
+    if(PROMPT_DOCS[nd.promptKey])h+=`<a class="plink" href="${GL}/m6/artifact_prompts/${PROMPT_DOCS[nd.promptKey]}" target="_blank" rel="noopener"><span style="color:var(--acc)">${IC.arrow}</span><div class="plink-info"><div class="plink-label">Читать промпт в GitLab</div><div class="plink-hint">${PROMPT_DOCS[nd.promptKey]} — документ с пояснениями и чек-листом приёмки</div></div></a>`;
+    h+=`<div class="pprev-cap">Полный текст промпта (прокручивается)</div><div class="pprev">${esc(PROMPTS[nd.promptKey])}</div>`;
+  }
+  (nd.examples||[]).forEach(ex=>{
+    h+=`<a class="plink ex" href="${ex.url}" target="_blank" rel="noopener"><span style="color:#4ecdc4">${IC.arrow}</span><div class="plink-info"><div class="plink-label">${ex.label}</div><div class="plink-hint">${ex.hint||''}</div></div></a>`;
+  });
+  const pcText=nd.reuse?'<strong>Артефакт найден</strong> — файл под рукой':'<strong>Этап пройден</strong> — артефакт собран и проверен';
+  h+=`<div class="pan-complete" data-action="toggle-done" data-id="${id}"><div class="pc-box${done?' on':''}">${IC.check}</div><div class="pc-text">${pcText}</div></div>`;
+  h+=`</div>`;
+  ct.innerHTML=h;
+  panel.classList.add('open');
+  renderNodes();renderEdges();
+}
+
+function closePanel(){
+  selected=null;
+  document.getElementById('panel').classList.remove('open');
+  renderNodes();renderEdges();
+}
+
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML}
+
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('on');
+  setTimeout(()=>t.classList.remove('on'),1500);
+}
+
+function updateProgress(){
+  const n=NODES.length,d=visited.size,p=Math.round(d/n*100);
+  document.getElementById('pf').style.width=p+'%';
+  document.getElementById('pl').textContent=d+'/'+n;
+  if(d===n){SCORM.done('completed');SCORM.score(100)}
+  else if(d>0){SCORM.done('incomplete');SCORM.score(p)}
+}
+
+/* ================ EVENTS ================ */
+document.getElementById('nodes').addEventListener('click',e=>{
+  const chk=e.target.closest('.nd-check');
+  if(chk){
+    e.stopPropagation();
+    const id=chk.closest('.nd').dataset.id;
+    if(visited.has(id))visited.delete(id);else visited.add(id);
+    save();renderNodes();renderEdges();updateProgress();
+    if(selected===id)openPanel(id);
+    return;
+  }
+  const nd=e.target.closest('.nd');
+  if(nd){e.stopPropagation();openPanel(nd.dataset.id)}
+});
+document.getElementById('panel').addEventListener('click',e=>{
+  const act=e.target.closest('[data-action]');
+  if(!act)return;
+  const a=act.dataset.action;
+  if(a==='close'){closePanel();return}
+  if(a==='toggle-done'){
+    const id=act.dataset.id;
+    if(visited.has(id))visited.delete(id);else visited.add(id);
+    save();openPanel(id);updateProgress();return;
+  }
+  if(a==='copy-prompt'){
+    const txt=PROMPTS[act.dataset.key]||'';
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(()=>toast('Промпт скопирован в буфер'),()=>fallbackCopy(txt));
+    } else fallbackCopy(txt);
+    return;
+  }
+});
+function fallbackCopy(txt){
+  const ta=document.createElement('textarea');
+  ta.value=txt;ta.style.cssText='position:fixed;opacity:0';
+  document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');toast('Промпт скопирован в буфер')}catch(e){toast('Не удалось скопировать')}
+  ta.remove();
+}
+vp.addEventListener('click',e=>{
+  if(!e.target.closest('.nd')&&!e.target.closest('.panel')&&selected){closePanel()}
+});
+document.getElementById('btnReset').onclick=()=>{visited.clear();save();selected=null;closePanel();renderNodes();updateProgress()};
+
+/* ================ INIT ================ */
+renderNodes();renderEdges();updateProgress();
+requestAnimationFrame(fitToView);
+</script>
+</body>
+</html>
