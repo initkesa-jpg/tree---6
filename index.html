@@ -153,7 +153,7 @@ a{color:var(--acc);text-decoration:none}
 <script>
 /* ================ SCORM ================ */
 const SCORM={api:null,init(){this.api=this._find(window);if(this.api)try{this.api.LMSInitialize('')}catch(e){}},done(s){if(!this.api)return;try{this.api.LMSSetValue('cmi.core.lesson_status',s);this.api.LMSCommit('')}catch(e){}},score(v){if(!this.api)return;try{this.api.LMSSetValue('cmi.core.score.raw',String(v));this.api.LMSSetValue('cmi.core.score.min','0');this.api.LMSSetValue('cmi.core.score.max','100');this.api.LMSCommit('')}catch(e){}},finish(){if(this.api)try{this.api.LMSFinish('')}catch(e){}},_find(w){let n=0;while(!w.API&&w.parent!==w&&n++<10)w=w.parent;return w.API||null}};
-SCORM.init();
+try{SCORM.init()}catch(e){}
 window.addEventListener('beforeunload',()=>SCORM.finish());
 
 /* ================ ICONS ================ */
@@ -765,24 +765,15 @@ document.getElementById('btnReset').onclick=()=>{visited.clear();save();selected
 
 /* ================ INIT ================ */
 renderNodes();renderEdges();updateProgress();
-/* авто-вписывание: ждём, пока у области появятся размеры, и пересчитываем при любом ресайзе */
 let userMoved=false;
 vp.addEventListener('pointerdown',()=>{userMoved=true});
 vp.addEventListener('wheel',()=>{userMoved=true},{passive:true});
 document.getElementById('btnFit').addEventListener('click',()=>{userMoved=false});
-
-function safeFit(){
-  const r=vp.getBoundingClientRect();
-  if(r.width<50||r.height<50)return;   // ещё не отрисовано: ждём
-  fitToView();
-}
+function safeFit(){const r=vp.getBoundingClientRect();if(r.width<50||r.height<50)return;fitToView()}
 requestAnimationFrame(safeFit);
 window.addEventListener('load',safeFit);
-if(window.ResizeObserver){
-  new ResizeObserver(()=>{ if(!userMoved) safeFit(); }).observe(vp);
-}else{
-  window.addEventListener('resize',()=>{ if(!userMoved) safeFit(); });
-}
+if(window.ResizeObserver){new ResizeObserver(()=>{if(!userMoved)safeFit()}).observe(vp)}
+else{window.addEventListener('resize',()=>{if(!userMoved)safeFit()})}
 </script>
 </body>
 </html>
