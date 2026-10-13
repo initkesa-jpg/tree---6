@@ -394,6 +394,7 @@ const W=200, H=88;
 const REUSE_BANNER='Этот артефакт у вас уже есть из прошлых практик — не создавайте заново. Ниже перечислены конкретные файлы: найдите свои версии и держите под рукой, они подставляются в промпты следующих шагов.';
 const GL='https://git.lab.karpov.courses/dddm/setup/-/blob/master';
 const NODES=[
+  /* — переиспользуемые артефакты прошлых модулей — */
   {id:'research',x:20,y:30,icon:'search',color:'#64748b',reuse:true,tag:'М1 · уроки 1.3–1.6',title:'Исследования и сегмент',
    desc:'Артефакты 2, 4 и 6 практики М1: конкуренты, JTBD, аналитическая записка',
    badges:[{t:'reuse',l:'практика М1'}],
@@ -422,6 +423,7 @@ const NODES=[
    outputs:['Видение и роль ИИ → слайд «Видение»','Гипотезы и риски → одноимённый слайд','Фазы внедрения → слайд «Ключевые фазы»'],
    banner:REUSE_BANNER},
 
+  /* — новые артефакты — */
   {id:'brief',x:135,y:210,icon:'file',color:'#ff5533',tag:'Шаг 0 · сборка из М1, ~10 минут',title:'Бриф продукта',
    desc:'Не пишется с нуля — собирается из вашего Product Vision + Lean Canvas (практика М1)',
    badges:[{t:'prompt',l:'Шаблон'},{t:'',l:'brief.md'}],
@@ -454,7 +456,6 @@ const NODES=[
    promptKey:'screens',
    promptPreview:'<span class="kw">Роль: прототипист.</span> Один файл prototype.html.\n\nПРИЛОЖИ: <span class="var">brief.md</span> + <span class="var">design_system.html</span>\nТолько компоненты дизайн-системы!\n\n1. Стартовый экран + ключевой сценарий\n2. Демо-данные правдоподобные, 5–10 записей\n3. Графики «как настоящие»\n<span class="kw">САМОПРОВЕРКА:</span> <span class="dim">пройти сценарий, скрины,\nконсоль, исправить замечания</span>',
    examples:[
-     {url:'https://initkesa-jpg.github.io/demo_example_prototype_scorm/',label:'Демо 6.4: пример прототипа «Помощник поддержки»',hint:'dddm_m6_demo_example_prototype_scorm.zip'},
      {url:'https://initkesa-jpg.github.io/pulse_app_screens_scorm/',label:'Витрина «Пульс»: экраны приложения',hint:'dddm_m6_pulse_app_screens_scorm.zip'}
    ]},
 
@@ -466,7 +467,9 @@ const NODES=[
    outputs:['landing.html — hero, фичи-выгоды, тарифы, CTA','Публикация на GitHub Pages → ссылка для людей','Скрины «этажей» → в презентацию'],
    promptKey:'landing',
    promptPreview:'<span class="kw">Роль: веб-дизайнер.</span> Один файл landing.html.\n\nПРИЛОЖИ: <span class="var">brief.md · design_system.html ·\nprototype.html + скриншоты</span>\n\nhero → цифры → фичи → экраны → тарифы → CTA\n- продукт КРУПНО, экраны настоящие, в корпусах\n- лица/объекты не обрезать\n- мобайл: бургер, без горизонтального скролла\n<span class="kw">САМОПРОВЕРКА:</span> <span class="dim">скрины этажей + консоль</span>',
-   examples:[]},
+   examples:[
+     {url:'https://initkesa-jpg.github.io/pulse_landing_scorm/',label:'Пример: лендинг «Пульс»',hint:'initkesa-jpg.github.io/pulse_landing_scorm'}
+   ]},
 
   /* ═══ ШАГ 4. ПРЕЗЕНТАЦИЯ ═══ */
   {id:'deck',x:250,y:760,icon:'deck',color:'#fb923c',tag:'Шаг 4 · урок 6.6',title:'Финальная презентация',
@@ -512,7 +515,7 @@ const EDGES=[
 ];
 
 /* ================ STATE ================ */
-const SK='dddm_m6_artifact_tree_v5';
+const SK='dddm_m6_artifact_tree_v6';
 let visited=new Set(), selected=null;
 function load(){try{const d=JSON.parse(localStorage.getItem(SK));if(d)visited=new Set(d.v||[])}catch(e){}}
 function save(){try{localStorage.setItem(SK,JSON.stringify({v:[...visited]}))}catch(e){}}
