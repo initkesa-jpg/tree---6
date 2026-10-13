@@ -14,6 +14,8 @@ html,body{height:100%;overflow:hidden;font-family:var(--font);background:var(--b
 body{display:flex;flex-direction:column}
 button{font-family:var(--font);cursor:pointer}
 a{color:var(--acc);text-decoration:none}
+
+/* ===== HEADER ===== */
 .hdr{display:flex;align-items:center;gap:12px;padding:10px 20px;background:var(--bg-s);border-bottom:1px solid rgba(255,255,255,.06);flex-shrink:0;z-index:20;position:relative}
 .hdr-title{font-size:15px;font-weight:700}
 .hdr-tag{font-size:10px;color:var(--acc);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
@@ -32,16 +34,22 @@ a{color:var(--acc);text-decoration:none}
   .prog-bar{display:none}
   .btn-fit{display:none}
 }
+
+/* ===== VIEWPORT ===== */
 .vp{flex:1;overflow:hidden;position:relative;cursor:grab;touch-action:none}
 .vp:active{cursor:grabbing}
 .vp-bg{position:absolute;inset:0;background:radial-gradient(circle at 1px 1px,rgba(255,255,255,.02) 1px,transparent 0) 0 0/28px 28px}
 .canvas{position:absolute;top:0;left:0;transform-origin:0 0;will-change:transform}
+
+/* ===== EDGES (SVG) ===== */
 .edge-svg{position:absolute;top:0;left:0;overflow:visible;pointer-events:none}
 .edge-path{fill:none;stroke:rgba(255,255,255,.12);stroke-width:1.5}
 .edge-path.carry{stroke-dasharray:6 4;stroke:rgba(255,255,255,.08)}
 .edge-path.active{stroke:var(--acc);stroke-width:2}
 .edge-lbl{font-family:var(--font);font-size:9px;fill:var(--t3);pointer-events:none}
 .edge-lbl-bg{fill:var(--bg);opacity:.85}
+
+/* ===== NODES ===== */
 .nd{position:absolute;width:200px;background:var(--bg-s);border:1.5px solid rgba(255,255,255,.08);border-radius:var(--radius);cursor:pointer;user-select:none;transition:border-color .2s,box-shadow .2s}
 .nd:hover{border-color:rgba(255,255,255,.18);box-shadow:0 4px 20px rgba(0,0,0,.3)}
 .nd.sel{border-color:var(--acc);box-shadow:0 0 0 3px rgba(255,85,51,.15)}
@@ -61,6 +69,8 @@ a{color:var(--acc);text-decoration:none}
 .nd-check:hover{border-color:var(--acc);background:rgba(255,85,51,.1)}
 .nd.done .nd-check{background:var(--ok);border-color:var(--ok)}
 .nd.done .nd-check:hover{background:#16a34a;border-color:#16a34a}
+
+/* ===== DETAIL PANEL ===== */
 .panel{position:fixed;top:0;right:0;width:400px;height:100%;background:var(--bg-s);border-left:1px solid rgba(255,255,255,.06);z-index:30;transform:translateX(100%);transition:transform .3s ease;display:flex;flex-direction:column}
 #panContent{display:flex;flex-direction:column;flex:1;min-height:0;height:100%}
 .panel.open{transform:translateX(0)}
@@ -74,15 +84,20 @@ a{color:var(--acc);text-decoration:none}
 .pan-close{background:none;border:none;color:var(--t3);padding:4px;display:flex;transition:color .15s}
 .pan-close:hover{color:var(--text)}
 .pan-scroll{flex:1;min-height:0;overflow-y:scroll;-webkit-overflow-scrolling:touch;touch-action:pan-y;overscroll-behavior:contain;padding:16px 20px 80px;scrollbar-width:thin;scrollbar-color:var(--bg-e) transparent}
+
 .pan-desc{font-size:12px;color:var(--t2);line-height:1.6;margin-bottom:16px}
 .pan-banner{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;font-size:11px;color:var(--t2);line-height:1.5;margin-bottom:16px}
 .pan-banner svg{flex-shrink:0;margin-top:1px;color:var(--t3)}
 .pan-banner.reuse{border-color:rgba(59,130,246,.25);background:rgba(59,130,246,.05)}
+
+/* IO sections */
 .io{margin-bottom:16px}
 .io-h{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--t3);margin-bottom:6px}
 .io-item{padding:5px 8px;margin-bottom:3px;background:var(--bg-e);border-radius:5px;font-size:11px;color:var(--t2);line-height:1.5}
 .io-item.in{border-left:2px solid rgba(59,130,246,.4)}
 .io-item.out{border-left:2px solid rgba(34,197,94,.4)}
+
+/* Prompt / examples */
 .plink{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,85,51,.06);border:1px solid rgba(255,85,51,.12);border-radius:8px;margin-bottom:12px;text-decoration:none !important;transition:background .15s;width:100%;text-align:left}
 .plink:hover{background:rgba(255,85,51,.1)}
 .plink-info{flex:1}
@@ -96,6 +111,8 @@ a{color:var(--acc);text-decoration:none}
 .pprev .kw{color:var(--acc);font-weight:600}
 .pprev .var{color:#4ecdc4}
 .pprev .dim{color:rgba(255,255,255,.3)}
+
+/* Complete button */
 .pan-complete{display:flex;align-items:center;gap:10px;padding:12px 16px;margin-top:16px;background:var(--bg-e);border-radius:8px;cursor:pointer;user-select:none;transition:background .15s}
 .pan-complete:hover{background:var(--bg-h)}
 .pc-box{width:22px;height:22px;border-radius:6px;border:2px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
@@ -104,6 +121,7 @@ a{color:var(--acc);text-decoration:none}
 .pc-box.on svg{opacity:1}
 .pc-text{font-size:12px;color:var(--t2)}
 .pc-text strong{color:var(--text)}
+
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#2a2e38;color:var(--text);padding:10px 22px;border-radius:99px;font-size:13px;font-weight:600;opacity:0;transition:.25s;pointer-events:none;z-index:50}
 .toast.on{opacity:1}
 </style>
@@ -135,7 +153,7 @@ a{color:var(--acc);text-decoration:none}
 <script>
 /* ================ SCORM ================ */
 const SCORM={api:null,init(){this.api=this._find(window);if(this.api)try{this.api.LMSInitialize('')}catch(e){}},done(s){if(!this.api)return;try{this.api.LMSSetValue('cmi.core.lesson_status',s);this.api.LMSCommit('')}catch(e){}},score(v){if(!this.api)return;try{this.api.LMSSetValue('cmi.core.score.raw',String(v));this.api.LMSSetValue('cmi.core.score.min','0');this.api.LMSSetValue('cmi.core.score.max','100');this.api.LMSCommit('')}catch(e){}},finish(){if(this.api)try{this.api.LMSFinish('')}catch(e){}},_find(w){let n=0;while(!w.API&&w.parent!==w&&n++<10)w=w.parent;return w.API||null}};
-try{SCORM.init()}catch(e){}
+SCORM.init();
 window.addEventListener('beforeunload',()=>SCORM.finish());
 
 /* ================ ICONS ================ */
@@ -161,7 +179,7 @@ const NODE_ICONS={
   search:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>',
 };
 
-/* ================ PROMPTS ================ */
+/* ================ PROMPTS (полные, копируются кнопкой) ================ */
 const PROMPTS={
 brief:`БРИФ ПРОДУКТА
 
@@ -408,7 +426,7 @@ const NODES=[
    inputs:['01_product_vision_lean_canvas.md — блок «Ключевые метрики» (урок 1.2)','02_feature_comparison_matrix.md — бенчмарки конкурентов (урок 1.3)','Дерево метрик — тренажёр предматериалов (свой результат)'],
    outputs:['Метрика успеха + целевое значение → в бриф','Бенчмарки → в слайд «Гипотезы и риски»'],
    banner:REUSE_BANNER,
-   examples:[{url:GL+'/m1/prompt_analytical_report.md',label:'Промпт: аналитическая записка',hint:'m1/prompt_analytical_report.md'}]},
+   examples:[{url:'examples/metric_tree_trainer.html',label:'Тренажёр «Дерево метрик»',hint:'освежить свою метрику'}]},
   {id:'finmodel',x:480,y:30,icon:'money',color:'#64748b',reuse:true,tag:'М2 · урок 2.6',title:'Финансовая модель',
    desc:'Артефакт 2 практики М2: ноутбук финмодели — затраты, LTV, окупаемость',
    badges:[{t:'reuse',l:'практика М2'}],
@@ -423,7 +441,7 @@ const NODES=[
    outputs:['Видение и роль ИИ → слайд «Видение»','Гипотезы и риски → одноимённый слайд','Фазы внедрения → слайд «Ключевые фазы»'],
    banner:REUSE_BANNER},
 
-  /* — новые артефакты — */
+  /* — новые артефакты: собираются по цепочке — */
   {id:'brief',x:135,y:210,icon:'file',color:'#ff5533',tag:'Шаг 0 · сборка из М1, ~10 минут',title:'Бриф продукта',
    desc:'Не пишется с нуля — собирается из вашего Product Vision + Lean Canvas (практика М1)',
    badges:[{t:'prompt',l:'Шаблон'},{t:'',l:'brief.md'}],
@@ -433,8 +451,6 @@ const NODES=[
    promptKey:'brief',
    promptPreview:'<span class="kw">БРИФ = ваш Product Vision, переложенный в 1 страницу</span>\nПродукт: <span class="var">[из PVT: категория + выгода]</span>\nСегмент: <span class="var">[из PVT «Для…»]</span>\nПотребность/боль: <span class="var">[из PVT «которые…»]</span>\nОтличие: <span class="var">[из PVT «в отличие от…»]</span>\nКлючевой сценарий: <span class="var">[вход → ценность]</span> <span class="dim">← новое</span>\nМетрика успеха: <span class="var">[из Lean Canvas «Ключевые метрики»]</span>\nХарактер бренда: <span class="var">[2–3 слова]</span>',
    examples:[{url:GL+'/m1/template_product_vision_lean_canvas.md',label:'Шаблон: Product Vision + Lean Canvas (урок 1.2)',hint:'m1/template_product_vision_lean_canvas.md'},{url:GL+'/m1/product_brief.md',label:'Готовый пример: бриф «Пульс»',hint:'m1/product_brief.md'}]},
-
-  /* ═══ ШАГ 1. ДИЗАЙН-СИСТЕМА ═══ */
   {id:'ds',x:135,y:390,icon:'palette',color:'#a78bfa',tag:'Шаг 1 · урок 6.4',title:'Дизайн-система',
    desc:'Константы и компоненты одним HTML — стиль решается один раз',
    badges:[{t:'prompt',l:'Промпт'},{t:'',l:'design_system.html'}],
@@ -442,12 +458,7 @@ const NODES=[
    outputs:['design_system.html: :root-переменные, компоненты','Раздел «Фото-стиль» для генерации изображений','Инструкция для агента: «только переменные из :root»'],
    promptKey:'ds',
    promptPreview:'<span class="kw">Роль: продуктовый дизайнер.</span>\nСобери дизайн-систему одним файлом.\n\nВХОД: <span class="var">[бриф из шага 0 целиком]</span>\n\n1. Константы — CSS-переменные в :root\n2. Типографика-пара + <span class="var">«цифры-герои»</span>\n3. Компоненты с живыми примерами\n4. Раздел <span class="kw">«Фото-стиль»</span>\n5. Инструкция для агента\n6. Файл самодостаточный\n<span class="dim">+ самопроверка контраста</span>',
-   examples:[
-     {url:'https://initkesa-jpg.github.io/demo_design_system_scorm/',label:'Демо 6.4: дизайн-система «Пульс» (вход агента)',hint:'dddm_m6_demo_design_system_scorm.zip'},
-     {url:'https://initkesa-jpg.github.io/pulse_design_system_scorm/',label:'Витрина «Пульс»: дизайн-система',hint:'dddm_m6_pulse_design_system_scorm.zip'}
-   ]},
-
-  /* ═══ ШАГ 2. ЭКРАНЫ ПРОДУКТА ═══ */
+   examples:[{url:'https://initkesa-jpg.github.io/demo_design_system_scorm/',label:'Демо 6.4: дизайн-система «Пульс» (вход агента)',hint:'dddm_m6_demo_design_system_scorm.zip'}]},
   {id:'screens',x:20,y:570,icon:'screens',color:'#3b82f6',tag:'Шаг 2 · урок 6.4',title:'Экраны продукта',
    desc:'Кликабельный прототип ключевого сценария + скриншоты состояний',
    badges:[{t:'prompt',l:'Промпт'},{t:'',l:'prototype.html'}],
@@ -455,11 +466,7 @@ const NODES=[
    outputs:['prototype.html — 4–6 состояний на демо-данных','Скриншоты каждого состояния → screens/','Отчёт самопроверки: сценарий, консоль, замечания'],
    promptKey:'screens',
    promptPreview:'<span class="kw">Роль: прототипист.</span> Один файл prototype.html.\n\nПРИЛОЖИ: <span class="var">brief.md</span> + <span class="var">design_system.html</span>\nТолько компоненты дизайн-системы!\n\n1. Стартовый экран + ключевой сценарий\n2. Демо-данные правдоподобные, 5–10 записей\n3. Графики «как настоящие»\n<span class="kw">САМОПРОВЕРКА:</span> <span class="dim">пройти сценарий, скрины,\nконсоль, исправить замечания</span>',
-   examples:[
-     {url:'https://initkesa-jpg.github.io/pulse_app_screens_scorm/',label:'Витрина «Пульс»: экраны приложения',hint:'dddm_m6_pulse_app_screens_scorm.zip'}
-   ]},
-
-  /* ═══ ШАГ 3. ПОСАДОЧНАЯ ═══ */
+   examples:[{url:'https://initkesa-jpg.github.io/demo_example_prototype_scorm/',label:'Демо 6.4: пример прототипа «Помощник поддержки»',hint:'dddm_m6_demo_example_prototype_scorm.zip'},{url:'https://initkesa-jpg.github.io/pulse_app_screens_scorm/',label:'Витрина «Пульс»: экраны приложения',hint:'dddm_m6_pulse_app_screens_scorm.zip'}]},
   {id:'landing',x:460,y:570,icon:'rocket',color:'#4ecdc4',tag:'Шаг 3 · урок 6.4',title:'Посадочная страница',
    desc:'Витрина продукта: hero, фичи, экраны, тарифы — публикуется на Pages',
    badges:[{t:'prompt',l:'Промпт'},{t:'',l:'landing.html'}],
@@ -467,11 +474,7 @@ const NODES=[
    outputs:['landing.html — hero, фичи-выгоды, тарифы, CTA','Публикация на GitHub Pages → ссылка для людей','Скрины «этажей» → в презентацию'],
    promptKey:'landing',
    promptPreview:'<span class="kw">Роль: веб-дизайнер.</span> Один файл landing.html.\n\nПРИЛОЖИ: <span class="var">brief.md · design_system.html ·\nprototype.html + скриншоты</span>\n\nhero → цифры → фичи → экраны → тарифы → CTA\n- продукт КРУПНО, экраны настоящие, в корпусах\n- лица/объекты не обрезать\n- мобайл: бургер, без горизонтального скролла\n<span class="kw">САМОПРОВЕРКА:</span> <span class="dim">скрины этажей + консоль</span>',
-   examples:[
-     {url:'https://initkesa-jpg.github.io/pulse_landing_scorm/',label:'Пример: лендинг «Пульс»',hint:'initkesa-jpg.github.io/pulse_landing_scorm'}
-   ]},
-
-  /* ═══ ШАГ 4. ПРЕЗЕНТАЦИЯ ═══ */
+   examples:[{url:'https://initkesa-jpg.github.io/pulse_landing_scorm/',label:'Витрина «Пульс»: посадочная страница',hint:'dddm_m6_pulse_landing_scorm.zip'}]},
   {id:'deck',x:250,y:760,icon:'deck',color:'#fb923c',tag:'Шаг 4 · урок 6.6',title:'Финальная презентация',
    desc:'6 слайдов питча на дизайн-системе; каждое число — из артефактов',
    badges:[{t:'prompt',l:'Промпт'},{t:'',l:'6 слайдов питча'}],
@@ -480,11 +483,7 @@ const NODES=[
    banner:'Здесь ничего не создаётся с нуля — презентация СВОДИТ готовые артефакты. Задача — собрать, а не выдумать.',
    promptKey:'deck',
    promptPreview:'<span class="kw">Роль: питч-мейкер.</span> HTML-слайды или MARP.\n\nПРИЛОЖИ: <span class="var">бриф · ДС · скрины экранов ·\nлендинг · финмодель · холст</span>\n\n<span class="kw">НИЧЕГО НЕ ВЫДУМЫВАЙ</span> — каждое число\nиз приложенных артефактов.\n\nтитул → видение → гипотезы и риски →\nфазы → ресурсы → инвестпоказатели\n<span class="dim">+ реплика 30–40 с на слайд (для озвучки)</span>',
-   examples:[
-     {url:'https://initkesa-jpg.github.io/pulse_presentation_scorm/',label:'Витрина «Пульс»: презентация с эксплейнером',hint:'dddm_m6_pulse_presentation_scorm.zip'}
-   ]},
-
-  /* ═══ ШАГ 5. ЭКСПЛЕЙНЕР ═══ */
+   examples:[{url:'https://initkesa-jpg.github.io/pulse_presentation_scorm/',label:'Витрина «Пульс»: презентация с эксплейнером',hint:'dddm_m6_pulse_presentation_scorm.zip'}]},
   {id:'explainer',x:250,y:940,icon:'play',color:'#ff5533',tag:'Шаг 5 · урок 6.6 · супер-артефакт',title:'Эксплейнер',
    desc:'Презентация говорит сама: голос + автолистание, до 5 минут',
    badges:[{t:'prompt',l:'Промпт'},{t:'',l:'Play ≤ 5 мин'}],
@@ -492,9 +491,7 @@ const NODES=[
    outputs:['Кнопка Play: голос объясняет, слайды листаются сами','mp3 на каждый слайд (бесплатный TTS) + фолбэк','Решение принимают без вашего присутствия'],
    promptKey:'explainer',
    promptPreview:'<span class="kw">Роль: моушн-редактор.</span>\n\nПРИЛОЖИ: <span class="var">presentation.html с репликами</span>\n\n1. Хронометраж ≤ 4:30 (150 слов/мин)\n2. edge-tts → mp3 на слайд → audio/\n3. Play: реплика → автолистание; Esc — стоп\n4. Фолбэк: Web Speech API\n5. Мобайл: кнопки не на краях\n<span class="kw">ПРОВЕРКА:</span> <span class="dim">полный прогон ≤ 5 минут</span>',
-   examples:[
-     {url:'https://initkesa-jpg.github.io/pulse_presentation_scorm/',label:'Витрина «Пульс»: презентация с эксплейнером',hint:'dddm_m6_pulse_presentation_scorm.zip'}
-   ]},
+   examples:[{url:'https://initkesa-jpg.github.io/pulse_presentation_scorm/',label:'Витрина «Пульс»: презентация с эксплейнером',hint:'dddm_m6_pulse_presentation_scorm.zip'}]},
 ];
 
 /* ================ EDGES ================ */
@@ -515,7 +512,7 @@ const EDGES=[
 ];
 
 /* ================ STATE ================ */
-const SK='dddm_m6_artifact_tree_v6';
+const SK='dddm_m6_artifact_tree_v3';
 let visited=new Set(), selected=null;
 function load(){try{const d=JSON.parse(localStorage.getItem(SK));if(d)visited=new Set(d.v||[])}catch(e){}}
 function save(){try{localStorage.setItem(SK,JSON.stringify({v:[...visited]}))}catch(e){}}
@@ -768,15 +765,7 @@ document.getElementById('btnReset').onclick=()=>{visited.clear();save();selected
 
 /* ================ INIT ================ */
 renderNodes();renderEdges();updateProgress();
-let userMoved=false;
-vp.addEventListener('pointerdown',()=>{userMoved=true});
-vp.addEventListener('wheel',()=>{userMoved=true},{passive:true});
-document.getElementById('btnFit').addEventListener('click',()=>{userMoved=false});
-function safeFit(){const r=vp.getBoundingClientRect();if(r.width<50||r.height<50)return;fitToView()}
-requestAnimationFrame(safeFit);
-window.addEventListener('load',safeFit);
-if(window.ResizeObserver){new ResizeObserver(()=>{if(!userMoved)safeFit()}).observe(vp)}
-else{window.addEventListener('resize',()=>{if(!userMoved)safeFit()})}
+requestAnimationFrame(fitToView);
 </script>
 </body>
 </html>
