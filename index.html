@@ -98,7 +98,7 @@ a{color:var(--acc);text-decoration:none}
 .io-item.out{border-left:2px solid rgba(34,197,94,.4)}
 
 /* Prompt / examples */
-.plink{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,85,51,.06);border:1px solid rgba(255,85,51,.12);border-radius:8px;margin-bottom:12px;text-decoration:none !important;transition:background .15s;width:100%;text-align:left}
+.plink{display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,85,51,.06);border:1px solid rgba(255,85,51,.12);border-radius:8px;margin-bottom:12px;text-decoration:none !important;transition:background .15s;width:100%;text-align:left;cursor:pointer;user-select:none}
 .plink:hover{background:rgba(255,85,51,.1)}
 .plink-info{flex:1}
 .plink-label{font-size:12px;font-weight:600;color:var(--acc)}
@@ -682,12 +682,15 @@ function openPanel(id){
   if(nd.inputs?.length)h+=`<div class="io"><div class="io-h">${nd.reuse?'Где взять':'Входные артефакты'}</div>${nd.inputs.map(i=>`<div class="io-item in">${esc(i)}</div>`).join('')}</div>`;
   if(nd.outputs?.length)h+=`<div class="io"><div class="io-h">${nd.reuse?'Что берём дальше':'Выходные артефакты'}</div>${nd.outputs.map(o=>`<div class="io-item out">${esc(o)}</div>`).join('')}</div>`;
   if(nd.promptKey){
-    h+=`<button class="plink" data-action="copy-prompt" data-key="${nd.promptKey}"><span style="color:var(--acc)">${IC.copy}</span><div class="plink-info"><div class="plink-label">Скопировать промпт целиком</div><div class="plink-hint">вставьте агенту вместе с файлами из «входных артефактов»</div></div><span style="color:var(--acc)">${IC.arrow}</span></button>`;
-    if(PROMPT_DOCS[nd.promptKey])h+=`<a class="plink" href="${GL}/m6/artifact_prompts/${PROMPT_DOCS[nd.promptKey]}" target="_blank" rel="noopener"><span style="color:var(--acc)">${IC.arrow}</span><div class="plink-info"><div class="plink-label">Читать промпт в GitLab</div><div class="plink-hint">${PROMPT_DOCS[nd.promptKey]} — документ с пояснениями и чек-листом приёмки</div></div></a>`;
+    h+=`<div class="plink" data-action="copy-prompt" data-key="${nd.promptKey}" role="button" tabindex="0"><span style="color:var(--acc)">${IC.copy}</span><div class="plink-info"><div class="plink-label">Скопировать промпт целиком</div><div class="plink-hint">вставьте агенту вместе с файлами из «входных артефактов»</div></div><span style="color:var(--acc)">${IC.arrow}</span></div>`;
+    if(PROMPT_DOCS[nd.promptKey]){
+      const docUrl=GL+'/m6/artifact_prompts/'+PROMPT_DOCS[nd.promptKey];
+      h+=`<div class="plink" data-action="open-link" data-url="${docUrl}" role="button" tabindex="0"><span style="color:var(--acc)">${IC.arrow}</span><div class="plink-info"><div class="plink-label">Читать промпт в GitLab</div><div class="plink-hint">${PROMPT_DOCS[nd.promptKey]} — документ с пояснениями и чек-листом приёмки</div></div></div>`;
+    }
     h+=`<div class="pprev-cap">Полный текст промпта (прокручивается)</div><div class="pprev">${esc(PROMPTS[nd.promptKey])}</div>`;
   }
   (nd.examples||[]).forEach(ex=>{
-    h+=`<a class="plink ex" href="${ex.url}" target="_blank" rel="noopener"><span style="color:#4ecdc4">${IC.arrow}</span><div class="plink-info"><div class="plink-label">${ex.label}</div><div class="plink-hint">${ex.hint||''}</div></div></a>`;
+    h+=`<div class="plink ex" data-action="open-link" data-url="${ex.url}" role="button" tabindex="0"><span style="color:#4ecdc4">${IC.arrow}</span><div class="plink-info"><div class="plink-label">${ex.label}</div><div class="plink-hint">${ex.hint||''}</div></div><span style="color:#4ecdc4">${IC.arrow}</span></div>`;
   });
   const pcText=nd.reuse?'<strong>Артефакт найден</strong> — файл под рукой':'<strong>Этап пройден</strong> — артефакт собран и проверен';
   h+=`<div class="pan-complete" data-action="toggle-done" data-id="${id}"><div class="pc-box${done?' on':''}">${IC.check}</div><div class="pc-text">${pcText}</div></div>`;
@@ -709,6 +712,17 @@ function toast(msg){
   const t=document.getElementById('toast');
   t.textContent=msg;t.classList.add('on');
   setTimeout(()=>t.classList.remove('on'),1500);
+}
+
+/* Надёжное открытие ссылки: сначала пробуем новую вкладку,
+   если браузер заблокировал popup — переходим в текущей. */
+function openUrl(url){
+  if(!url)return;
+  let w=null;
+  try{w=window.open(url,'_blank','noopener,noreferrer')}catch(e){w=null}
+  if(!w||w.closed||typeof w.closed==='undefined'){
+    try{window.top.location.href=url}catch(e){window.location.href=url}
+  }
 }
 
 function updateProgress(){
@@ -733,17 +747,30 @@ document.getElementById('nodes').addEventListener('click',e=>{
   const nd=e.target.closest('.nd');
   if(nd){e.stopPropagation();openPanel(nd.dataset.id)}
 });
+
 document.getElementById('panel').addEventListener('click',e=>{
   const act=e.target.closest('[data-action]');
   if(!act)return;
   const a=act.dataset.action;
+
   if(a==='close'){closePanel();return}
+
+  if(a==='open-link'){
+    e.preventDefault();
+    e.stopPropagation();
+    openUrl(act.dataset.url);
+    return;
+  }
+
   if(a==='toggle-done'){
     const id=act.dataset.id;
     if(visited.has(id))visited.delete(id);else visited.add(id);
     save();openPanel(id);updateProgress();return;
   }
+
   if(a==='copy-prompt'){
+    e.preventDefault();
+    e.stopPropagation();
     const txt=PROMPTS[act.dataset.key]||'';
     if(navigator.clipboard&&navigator.clipboard.writeText){
       navigator.clipboard.writeText(txt).then(()=>toast('Промпт скопирован в буфер'),()=>fallbackCopy(txt));
@@ -751,6 +778,7 @@ document.getElementById('panel').addEventListener('click',e=>{
     return;
   }
 });
+
 function fallbackCopy(txt){
   const ta=document.createElement('textarea');
   ta.value=txt;ta.style.cssText='position:fixed;opacity:0';
@@ -758,6 +786,7 @@ function fallbackCopy(txt){
   try{document.execCommand('copy');toast('Промпт скопирован в буфер')}catch(e){toast('Не удалось скопировать')}
   ta.remove();
 }
+
 vp.addEventListener('click',e=>{
   if(!e.target.closest('.nd')&&!e.target.closest('.panel')&&selected){closePanel()}
 });
