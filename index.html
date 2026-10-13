@@ -451,6 +451,7 @@ const NODES=[
    promptKey:'brief',
    promptPreview:'<span class="kw">БРИФ = ваш Product Vision, переложенный в 1 страницу</span>\nПродукт: <span class="var">[из PVT: категория + выгода]</span>\nСегмент: <span class="var">[из PVT «Для…»]</span>\nПотребность/боль: <span class="var">[из PVT «которые…»]</span>\nОтличие: <span class="var">[из PVT «в отличие от…»]</span>\nКлючевой сценарий: <span class="var">[вход → ценность]</span> <span class="dim">← новое</span>\nМетрика успеха: <span class="var">[из Lean Canvas «Ключевые метрики»]</span>\nХарактер бренда: <span class="var">[2–3 слова]</span>',
    examples:[{url:GL+'/m1/template_product_vision_lean_canvas.md',label:'Шаблон: Product Vision + Lean Canvas (урок 1.2)',hint:'m1/template_product_vision_lean_canvas.md'},{url:GL+'/m1/product_brief.md',label:'Готовый пример: бриф «Пульс»',hint:'m1/product_brief.md'}]},
+
   {id:'ds',x:135,y:390,icon:'palette',color:'#a78bfa',tag:'Шаг 1 · урок 6.4',title:'Дизайн-система',
    desc:'Константы и компоненты одним HTML — стиль решается один раз',
    badges:[{t:'prompt',l:'Промпт'},{t:'',l:'design_system.html'}],
@@ -458,7 +459,12 @@ const NODES=[
    outputs:['design_system.html: :root-переменные, компоненты','Раздел «Фото-стиль» для генерации изображений','Инструкция для агента: «только переменные из :root»'],
    promptKey:'ds',
    promptPreview:'<span class="kw">Роль: продуктовый дизайнер.</span>\nСобери дизайн-систему одним файлом.\n\nВХОД: <span class="var">[бриф из шага 0 целиком]</span>\n\n1. Константы — CSS-переменные в :root\n2. Типографика-пара + <span class="var">«цифры-герои»</span>\n3. Компоненты с живыми примерами\n4. Раздел <span class="kw">«Фото-стиль»</span>\n5. Инструкция для агента\n6. Файл самодостаточный\n<span class="dim">+ самопроверка контраста</span>',
-   examples:[{url:'examples/design_system.html',label:'Живой пример: ДС «Пульс»',hint:'design_system.html'}]},
+   examples:[
+     {url:'https://initkesa-jpg.github.io/demo_design_system_scorm/',label:'Демо 6.4: дизайн-система «Пульс» (вход агента)',hint:'dddm_m6_demo_design_system_scorm.zip'},
+     {url:'https://initkesa-jpg.github.io/pulse_design_system_scorm/',label:'Витрина «Пульс»: дизайн-система',hint:'dddm_m6_pulse_design_system_scorm.zip'},
+     {url:'examples/design_system.html',label:'Живой пример: ДС «Пульс»',hint:'design_system.html'}
+   ]},
+
   {id:'screens',x:20,y:570,icon:'screens',color:'#3b82f6',tag:'Шаг 2 · урок 6.4',title:'Экраны продукта',
    desc:'Кликабельный прототип ключевого сценария + скриншоты состояний',
    badges:[{t:'prompt',l:'Промпт'},{t:'',l:'prototype.html'}],
@@ -466,7 +472,12 @@ const NODES=[
    outputs:['prototype.html — 4–6 состояний на демо-данных','Скриншоты каждого состояния → screens/','Отчёт самопроверки: сценарий, консоль, замечания'],
    promptKey:'screens',
    promptPreview:'<span class="kw">Роль: прототипист.</span> Один файл prototype.html.\n\nПРИЛОЖИ: <span class="var">brief.md</span> + <span class="var">design_system.html</span>\nТолько компоненты дизайн-системы!\n\n1. Стартовый экран + ключевой сценарий\n2. Демо-данные правдоподобные, 5–10 записей\n3. Графики «как настоящие»\n<span class="kw">САМОПРОВЕРКА:</span> <span class="dim">пройти сценарий, скрины,\nконсоль, исправить замечания</span>',
-   examples:[{url:'examples/watch_screens.html',label:'Пример: экраны часов «Пульс»',hint:'5 состояний'},{url:'https://initkesa-jpg.github.io/pulse_landing_scorm/',label:'Пример: приложение «Пульс»',hint:'5 макетов'}]},
+   examples:[
+     {url:'https://initkesa-jpg.github.io/demo_example_prototype_scorm/',label:'Демо 6.4: пример прототипа «Помощник поддержки»',hint:'dddm_m6_demo_example_prototype_scorm.zip'},
+     {url:'https://initkesa-jpg.github.io/pulse_app_screens_scorm/',label:'Витрина «Пульс»: экраны приложения',hint:'dddm_m6_pulse_app_screens_scorm.zip'},
+     {url:'examples/watch_screens.html',label:'Пример: экраны часов «Пульс»',hint:'5 состояний'}
+   ]},
+
   {id:'landing',x:460,y:570,icon:'rocket',color:'#4ecdc4',tag:'Шаг 3 · урок 6.4',title:'Посадочная страница',
    desc:'Витрина продукта: hero, фичи, экраны, тарифы — публикуется на Pages',
    badges:[{t:'prompt',l:'Промпт'},{t:'',l:'landing.html'}],
@@ -474,7 +485,10 @@ const NODES=[
    outputs:['landing.html — hero, фичи-выгоды, тарифы, CTA','Публикация на GitHub Pages → ссылка для людей','Скрины «этажей» → в презентацию'],
    promptKey:'landing',
    promptPreview:'<span class="kw">Роль: веб-дизайнер.</span> Один файл landing.html.\n\nПРИЛОЖИ: <span class="var">brief.md · design_system.html ·\nprototype.html + скриншоты</span>\n\nhero → цифры → фичи → экраны → тарифы → CTA\n- продукт КРУПНО, экраны настоящие, в корпусах\n- лица/объекты не обрезать\n- мобайл: бургер, без горизонтального скролла\n<span class="kw">САМОПРОВЕРКА:</span> <span class="dim">скрины этажей + консоль</span>',
-   examples:[{url:'https://initkesa-jpg.github.io/pulse_landing_scorm/',label:'Пример: лендинг «Пульс»',hint:'initkesa-jpg.github.io/pulse_landing_scorm'}]},
+   examples:[
+     {url:'https://initkesa-jpg.github.io/pulse_landing_scorm/',label:'Пример: лендинг «Пульс»',hint:'initkesa-jpg.github.io/pulse_landing_scorm'}
+   ]},
+
   {id:'deck',x:250,y:760,icon:'deck',color:'#fb923c',tag:'Шаг 4 · урок 6.6',title:'Финальная презентация',
    desc:'6 слайдов питча на дизайн-системе; каждое число — из артефактов',
    badges:[{t:'prompt',l:'Промпт'},{t:'',l:'6 слайдов питча'}],
@@ -483,7 +497,11 @@ const NODES=[
    banner:'Здесь ничего не создаётся с нуля — презентация СВОДИТ готовые артефакты. Задача — собрать, а не выдумать.',
    promptKey:'deck',
    promptPreview:'<span class="kw">Роль: питч-мейкер.</span> HTML-слайды или MARP.\n\nПРИЛОЖИ: <span class="var">бриф · ДС · скрины экранов ·\nлендинг · финмодель · холст</span>\n\n<span class="kw">НИЧЕГО НЕ ВЫДУМЫВАЙ</span> — каждое число\nиз приложенных артефактов.\n\nтитул → видение → гипотезы и риски →\nфазы → ресурсы → инвестпоказатели\n<span class="dim">+ реплика 30–40 с на слайд (для озвучки)</span>',
-   examples:[{url:'examples/presentation.html',label:'Пример: презентация «Пульс»',hint:'10 слайдов + Play'}]},
+   examples:[
+     {url:'https://initkesa-jpg.github.io/pulse_presentation_scorm/',label:'Витрина «Пульс»: презентация с эксплейнером',hint:'dddm_m6_pulse_presentation_scorm.zip'},
+     {url:'examples/presentation.html',label:'Пример: презентация «Пульс»',hint:'10 слайдов + Play'}
+   ]},
+
   {id:'explainer',x:250,y:940,icon:'play',color:'#ff5533',tag:'Шаг 5 · урок 6.6 · супер-артефакт',title:'Эксплейнер',
    desc:'Презентация говорит сама: голос + автолистание, до 5 минут',
    badges:[{t:'prompt',l:'Промпт'},{t:'',l:'Play ≤ 5 мин'}],
@@ -491,7 +509,9 @@ const NODES=[
    outputs:['Кнопка Play: голос объясняет, слайды листаются сами','mp3 на каждый слайд (бесплатный TTS) + фолбэк','Решение принимают без вашего присутствия'],
    promptKey:'explainer',
    promptPreview:'<span class="kw">Роль: моушн-редактор.</span>\n\nПРИЛОЖИ: <span class="var">presentation.html с репликами</span>\n\n1. Хронометраж ≤ 4:30 (150 слов/мин)\n2. edge-tts → mp3 на слайд → audio/\n3. Play: реплика → автолистание; Esc — стоп\n4. Фолбэк: Web Speech API\n5. Мобайл: кнопки не на краях\n<span class="kw">ПРОВЕРКА:</span> <span class="dim">полный прогон ≤ 5 минут</span>',
-   examples:[{url:'examples/presentation.html',label:'Пример: кнопка Play в «Пульсе»',hint:'эксплейнер в действии'}]},
+   examples:[
+     {url:'https://initkesa-jpg.github.io/pulse_presentation_scorm/',label:'Витрина «Пульс»: презентация с эксплейнером',hint:'dddm_m6_pulse_presentation_scorm.zip'}
+   ]},
 ];
 
 /* ================ EDGES ================ */
@@ -512,7 +532,7 @@ const EDGES=[
 ];
 
 /* ================ STATE ================ */
-const SK='dddm_m6_artifact_tree_v3';
+const SK='dddm_m6_artifact_tree_v4';
 let visited=new Set(), selected=null;
 function load(){try{const d=JSON.parse(localStorage.getItem(SK));if(d)visited=new Set(d.v||[])}catch(e){}}
 function save(){try{localStorage.setItem(SK,JSON.stringify({v:[...visited]}))}catch(e){}}
